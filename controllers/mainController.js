@@ -1,5 +1,5 @@
 const GIFEncoder = require('gif-encoder-2')
-const { createCanvas, Image } = require('canvas');
+// const { createCanvas, Image } = require('canvas');
 const fs = require('fs');
 const { createWriteStream, readdir } = require('fs')
 const { promisify } = require('util')
