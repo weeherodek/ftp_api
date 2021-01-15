@@ -12,7 +12,6 @@
   "license": "ISC",
   "dependencies": {
     "basic-ftp": "^4.6.3",
-    "canvas": "^2.6.1",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "gif-encoder-2": "^1.0.5",
