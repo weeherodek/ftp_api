@@ -12,8 +12,5 @@ router.get('/gif', MainController.generateGif);
 router.get('/images', MainController.getImages);
 router.get('/getgif', MainController.getGif);
 router.get('/lastimage', MainController.lastImage);
-router.get('/app/ftp/intermediate-octree.gif', (req,res)=>{
-    res.render(path.join(__dirname,'ftp','intermediate-octree.gif'));
-})
 
 module.exports = router;
