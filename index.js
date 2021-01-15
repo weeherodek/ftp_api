@@ -3,7 +3,7 @@ const app = express();
 const cors = require('cors');
 
 const routes = require('./routes');
-const Schedule = require('../FTP_API/helper/schedule');
+const Schedule = require('./helper/schedule');
 
 const port  = process.env.PORT || 3003;
 
