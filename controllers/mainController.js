@@ -147,31 +147,13 @@ class MainController{
     static async getGif(req,res){
         try {
             const gifPath = path.join(__dirname,'../','ftp','intermediate-octree.gif');
-            return res.status(200).json(gifPath);
+            return res.sendFile(gifPath);
         } catch (error) {
             console.log('Gif não foi gerado.');
             return res.status(400).json(`Gif não encontrado, tente novamente mais tarde.`);
         }
     }
 
-    static async getGifPath(req,res){
-        try {
-            const gifPath = getGif(req,res);
-            console.log(gifPath);
-        } catch (error) {
-            console.log('Gif não foi gerado.', error);
-            return res.status(400).json(`Gif não encontrado, tente novamente mais tarde.`);
-        }
-    }
-
-    static async lastImage(req,res){
-        try {
-            
-        } catch (error) {
-            console.log('Gif não foi gerado.', error);
-            return res.status(400).json(`Foto não encontrada, tente novamente mais tarde.`);
-        }
-    }
 }
 
 module.exports = MainController;
