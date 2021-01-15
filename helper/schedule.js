@@ -1,8 +1,6 @@
 const schedule = require('node-schedule');
 const MainController = require('../controllers/mainController');
 
-
-
 class Schedule{
     static async updateImage(){
         const rule = new schedule.RecurrenceRule();

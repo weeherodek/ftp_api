@@ -1,6 +1,5 @@
 const {Router} = require('express');
 const MainController = require('../controllers/mainController'); 
-const Schedule = require('../helper/schedule');
 
 
 const router = Router();
@@ -11,5 +10,6 @@ router.get('/', (req,res)=>{
 router.get('/gif', MainController.generateGif);  
 router.get('/images', MainController.getImages);
 router.get('/getgif', MainController.getGif);
+router.get('/lastimage', MainController.lastImage);
 
 module.exports = router;
