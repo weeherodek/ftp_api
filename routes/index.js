@@ -12,7 +12,7 @@ router.get('/images', MainController.getImages);
 router.get('/getgif', MainController.getGif);
 router.get('/lastimage', MainController.lastImage);
 router.get('/app/ftp/intermediate-octree.gif', (req,res)=>{
-    res.send(path.join(__dirname,'ftp','intermediate-neuquant.gif'))
+    res.send(path.join(__dirname,'ftp','intermediate-octree.gif'))
 })
 
 module.exports = router;
