@@ -41,7 +41,6 @@ class MainController{
           return new Promise(async resolve1 => {
             // read image directory
             const files = await readdirAsync(imagesFolder);
-            console.log(files);
          
             // find the width and height of the image
             const [width, height] = await new Promise(resolve2 => {
@@ -52,7 +51,6 @@ class MainController{
          
             // base GIF filepath on which algorithm is being used
             const dstPath = path.join(__dirname, '../','ftp', `intermediate-${algorithm}.gif`);
-            console.log(dstPath);
             // create a write stream for GIF data
             const writeStream = createWriteStream(dstPath)
             // when stream closes GIF is created so resolve promise
@@ -64,7 +62,7 @@ class MainController{
             // pipe encoder's read stream to our write stream
             encoder.createReadStream().pipe(writeStream)
             encoder.start()
-            encoder.setDelay(200)
+            encoder.setDelay(600);
          
             const canvas = createCanvas(width, height)
             const ctx = canvas.getContext('2d')
