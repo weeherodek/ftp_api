@@ -5,32 +5,34 @@ const { createWriteStream, readdir, readdirSync } = require('fs')
 const { promisify } = require('util')
 const path = require('path')
 const ftp = require('basic-ftp');
+const schedule = require('node-schedule');
 
 class MainController{
     static async getImages(req,res){
-        const client = new ftp.Client()
-        client.ftp.verbose = false;
-        try {
-            await client.access({
-                host: "riomidia.cor.rio.gov.br",
-                user: "yellowpages",
-                password: "cTbB7jUM",
-                secure: false,
-            })
-            client.trackProgress(info=> {
-                console.log("File: " , info.name);
-                console.log("Bytes: ", info.bytes);
-            });
-            await client.downloadToDir('ftp/commapa', "commapa");
-            await fs.unlinkSync(path.join(__dirname,'../','ftp','commapa','Thumbs.db'));
-            await fs.unlinkSync(path.join(__dirname,'../','ftp','commapa','radarsem.png'));
-            client.trackProgress();
-            client.close();
-            return res.status(200).json('Imagens atualizadas !');
-        } catch (error) {
-            console.log('Erro ao atualizar imagens.', error);
-            return res.status(400).json('Erro ao atualizar imagens.');
-        }
+          const client = new ftp.Client()
+          client.ftp.verbose = false;
+          try {
+              await client.access({
+                  host: "riomidia.cor.rio.gov.br",
+                  user: "yellowpages",
+                  password: "cTbB7jUM",
+                  secure: false,
+              })
+              client.trackProgress(info=> {
+                  console.log("File: " , info.name);
+                  console.log("Bytes: ", info.bytes);
+              });
+              await client.downloadToDir('ftp/commapa', "commapa");
+              await fs.unlinkSync(path.join(__dirname,'../','ftp','commapa','Thumbs.db'));
+              await fs.unlinkSync(path.join(__dirname,'../','ftp','commapa','radarsem.png'));
+              client.trackProgress();
+              client.close();
+              return res.status(200).json('Imagens atualizadas !');
+          } catch (error) {
+              console.log('Erro ao atualizar imagens.', error);
+              return res.status(400).json('Erro ao atualizar imagens.');
+          }
+
     }
 
     static async generateGif(req,res){
@@ -57,19 +59,19 @@ class MainController{
             writeStream.on('close', () => {
               resolve1()
             })
-         
+            
             const encoder = new GIFEncoder(width, height, algorithm)
             // pipe encoder's read stream to our write stream
             encoder.createReadStream().pipe(writeStream)
             encoder.start()
             encoder.setDelay(600);
-         
+            
             const canvas = createCanvas(width, height)
             const ctx = canvas.getContext('2d')
-         
+            
             // draw an image for each file and add frame to encoder
             for (const file of files) {
-                console.log(file);
+              console.log(file);
               await new Promise(resolve3 => {
                 const image = new Image()
                 image.onload = () => {
@@ -81,14 +83,14 @@ class MainController{
               })
             }
           })
-        }
-         try {
-          await createGif('octree');
-          return res.status(200).json('Gif gerado com sucesso !');
-         } catch (error) {
-          console.log('Erro ao gerar gif ', error);
-          return res.status(400).json('Erro ao gerar gif');
-         }
+        }        
+          try {
+           await createGif('octree');
+           return res.status(200).json('Gif gerado com sucesso !');
+          } catch (error) {
+           console.log('Erro ao gerar gif ', error);
+           return res.status(400).json('Erro ao gerar gif');
+          }
     }
 
     static async getGif(req,res){
