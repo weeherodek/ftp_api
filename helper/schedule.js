@@ -82,9 +82,9 @@ class Schedule{
                 }
               })
         }
-        const startTime = new Date(Date.now() + 5000);
+        const startTime = new Date(Date.now() + 900000);
         const endTime = new Date(startTime.getTime() + 20000);
-        const job = schedule.scheduleJob({start:startTime, end:endTime}, ()=>{
+        const job = schedule.scheduleJob({start:startTime}, ()=>{
                 console.log('Gerando gif...');
                 generateGif('octree');
                 console.log('Gif Gerado');
