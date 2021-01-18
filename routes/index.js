@@ -6,9 +6,7 @@ const router = Router();
 const MainController = require('../controllers/mainController');
 const Schedule = require('../helper/schedule');
 
-// Schedule.teste();
-Schedule.updateImage();
-Schedule.updateGif();
+Schedule.updateAll();
 
 router.get('/', (req,res)=>{
     return res.status(200).json('HOME');
